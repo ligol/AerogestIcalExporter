@@ -8,9 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter
 
 class DateAdapter : XmlAdapter<String, Date>() {
 
-    private val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm").apply {
-        this.timeZone = TimeZone.getTimeZone("Europe/Paris")
-    }
+    private val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm")
 
     @Throws(Exception::class)
     override fun marshal(v: Date): String {

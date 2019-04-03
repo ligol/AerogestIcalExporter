@@ -118,7 +118,7 @@ object IcalGenerator {
 
                 val description = Description("${reservation.type?: "Vol"} $instructorString $planeString $destination")
 
-                val event = VEvent(DateTime(reservation.from), DateTime(reservation.to), "${reservation.type?: "Vol"} $instructorString $planeString")
+                val event = VEvent(DateTime(reservation.from).apply { timeZone = timeZone }, DateTime(reservation.to).apply { timeZone = timeZone }, "${reservation.type?: "Vol"} $instructorString $planeString")
                 event.properties.add(tz.timeZoneId)
                 val uid = ug.generateUid()
                 event.properties.add(uid)
