@@ -105,6 +105,7 @@ object IcalGenerator {
         calendar.properties.add(ProdId("-//$personName Aerogest//FR"))
         calendar.properties.add(Version.VERSION_2_0)
         calendar.properties.add(CalScale.GREGORIAN)
+        calendar.components.add(tz)
 
         getReservation().forEach {reservation ->
             if (reservation.ressources?.any { it.ressourceName?.contains(personName) == true } == true) {
