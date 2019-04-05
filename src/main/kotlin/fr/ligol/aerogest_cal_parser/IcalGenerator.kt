@@ -7,10 +7,7 @@ import net.fortuna.ical4j.model.Calendar
 import net.fortuna.ical4j.model.DateTime
 import net.fortuna.ical4j.model.TimeZoneRegistryFactory
 import net.fortuna.ical4j.model.component.VEvent
-import net.fortuna.ical4j.model.property.CalScale
-import net.fortuna.ical4j.model.property.Description
-import net.fortuna.ical4j.model.property.ProdId
-import net.fortuna.ical4j.model.property.Version
+import net.fortuna.ical4j.model.property.*
 import net.fortuna.ical4j.util.RandomUidGenerator
 import okhttp3.*
 import java.io.StringWriter
@@ -121,7 +118,7 @@ object IcalGenerator {
 
                 val event = VEvent(DateTime(reservation.from).apply { timeZone = timeZone }, DateTime(reservation.to).apply { timeZone = timeZone }, "${reservation.type?: "Vol"} $instructorString $planeString")
                 event.properties.add(tz.timeZoneId)
-                val uid = ug.generateUid()
+                val uid = Uid(reservation.hashCode().toString())
                 event.properties.add(uid)
                 event.properties.add(description)
                 calendar.components.add(event)
