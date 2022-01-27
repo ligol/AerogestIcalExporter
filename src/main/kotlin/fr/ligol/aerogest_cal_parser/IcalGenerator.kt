@@ -113,9 +113,9 @@ object IcalGenerator {
                 val instructorString = if (instructor != null) "avec ${instructor.ressourceName}" else ""
 
                 val destination = if (!reservation.destination.isNullOrEmpty()) "a destination de ${reservation.destination}" else ""
-                val desc = if (!reservation.description.isNullOrEmpty()) "Description du vol :${reservation.description}" else ""
+                val desc = if (!reservation.description.isNullOrEmpty()) "Description du vol :\n${reservation.description}" else ""
 
-                val description = Description("${reservation.type?: "Vol"} $instructorString $planeString $destination \n\n $desc")
+                val description = Description("${reservation.type?: "Vol"} $instructorString $planeString $destination\n\n$desc")
 
                 val event = VEvent(DateTime(reservation.from).apply { timeZone = timeZone }, DateTime(reservation.to).apply { timeZone = timeZone }, "${reservation.type?: "Vol"} $instructorString $planeString")
                 event.properties.add(tz.timeZoneId)
