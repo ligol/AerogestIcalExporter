@@ -105,16 +105,17 @@ object IcalGenerator {
         calendar.components.add(tz)
 
         getReservation().forEach {reservation ->
-            if (reservation.ressources?.any { it.ressourceName?.contains(personName) == true } == true) {
+            if (reservation.ressources?.any { it.ressourceName?.toLowerCase()?.contains(personName.toLowerCase()) == true } == true) {
                 val plane = reservation.ressources.find { it.type == 1 }
-                val instructor = reservation.ressources.find { it.type == 2 && it.ressourceName?.contains(personName) != true }
+                val instructor = reservation.ressources.find { it.type == 2 && it.ressourceName?.toLowerCase()?.contains(personName.toLowerCase()) != true }
 
                 val planeString = if (plane != null) "sur ${plane.ressourceName}" else ""
                 val instructorString = if (instructor != null) "avec ${instructor.ressourceName}" else ""
 
                 val destination = if (!reservation.destination.isNullOrEmpty()) "a destination de ${reservation.destination}" else ""
+                val desc = if (!reservation.description.isNullOrEmpty()) "Description du vol :${reservation.description}" else ""
 
-                val description = Description("${reservation.type?: "Vol"} $instructorString $planeString $destination")
+                val description = Description("${reservation.type?: "Vol"} $instructorString $planeString $destination \n\n $desc")
 
                 val event = VEvent(DateTime(reservation.from).apply { timeZone = timeZone }, DateTime(reservation.to).apply { timeZone = timeZone }, "${reservation.type?: "Vol"} $instructorString $planeString")
                 event.properties.add(tz.timeZoneId)

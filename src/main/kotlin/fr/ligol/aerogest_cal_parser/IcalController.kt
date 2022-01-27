@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 class IcalController {
 
     @RequestMapping(produces = ["text/calendar"])
-    fun calendar(@RequestParam("personName") personName: String): String {
-        return IcalGenerator.getIcal(personName)
+    fun calendar(@RequestParam("firstname") firstname: String, @RequestParam("lastname") lastname: String): String {
+        return IcalGenerator.getIcal("$lastname $firstname")
     }
 }

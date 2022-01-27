@@ -17,7 +17,7 @@ repositories {
 
 bootJar {
     baseName = 'aerogest-cal-parser'
-    version =  '0.1.0'
+    version =  '0.1.1'
 }
 
 dependencies {
@@ -27,7 +27,7 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:okhttp:3.14.0'
 
-    implementation 'org.mnode.ical4j:ical4j:3.0.6'
+    implementation 'org.mnode.ical4j:ical4j:3.1.2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -50,5 +50,5 @@ docker {
     dependsOn bootJar
     name "${project.group}/${bootJar.baseName}"
     copySpec.from("${project.rootDir}/build/libs").into("jar")
-    buildArgs(['JAR_FILE': "/jar/aerogest-cal-parser-0.1.0.jar"])
+    buildArgs(['JAR_FILE': "/jar/aerogest-cal-parser-0.1.1.jar"])
 }
